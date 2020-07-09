@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_samples/animation_widget/animated_builder_widget.dart';
 import 'package:flutter_samples/animation_widget/animated_container_widget.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_samples/async/stream_builder_widget.dart';
 import 'package:flutter_samples/basic_widget/image_widget.dart';
 import 'package:flutter_samples/basic_widget/media_query_widget.dart';
 import 'package:flutter_samples/basic_widget/text_widget.dart';
+import 'package:flutter_samples/camera/camera.dart';
 import 'package:flutter_samples/controller/scroll_controller.dart';
 import 'package:flutter_samples/input_widget/form_widget.dart';
 import 'package:flutter_samples/interaction_model_widget/absorb_pointer_widget.dart';
@@ -31,7 +33,15 @@ import 'package:flutter_samples/scrolling_widget/scroll_view_widget.dart';
 import 'package:flutter_samples/single_child_layout_widget/container_widget.dart';
 import 'package:tuple/tuple.dart';
 
-void main() {
+List<CameraDescription> cameras = [];
+
+Future<void> main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error: ${e.code}\nError Message: ${e.description}');
+  }
   runApp(MyApp());
 }
 
@@ -104,6 +114,13 @@ class MyHomePage extends StatelessWidget {
     Tuple2('Controller class', <Tuple2>[
       Tuple2('ScrollController', (_) => ScrollControllerSample()),
     ]),
+    Tuple2('Camera', <Tuple2>[
+      Tuple2(
+          'Camera',
+          (_) => CameraSample(
+                camera: cameras.first,
+              )),
+    ])
   ];
   final String title;
 
