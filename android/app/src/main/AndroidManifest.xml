@@ -43,5 +43,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- To automatically download the ML model to the device
+             after this app is installed from the Play Store. -->
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="ocr,label,barcode,face" />
     </application>
 </manifest>

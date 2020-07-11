@@ -11,6 +11,10 @@ import 'package:flutter_samples/basic_widget/image_widget.dart';
 import 'package:flutter_samples/basic_widget/media_query_widget.dart';
 import 'package:flutter_samples/basic_widget/text_widget.dart';
 import 'package:flutter_samples/camera/camera.dart';
+import 'package:flutter_samples/camera/firebase_barcode.dart';
+import 'package:flutter_samples/camera/firebase_face.dart';
+import 'package:flutter_samples/camera/firebase_image_label.dart';
+import 'package:flutter_samples/camera/firebase_text.dart';
 import 'package:flutter_samples/controller/scroll_controller.dart';
 import 'package:flutter_samples/input_widget/form_widget.dart';
 import 'package:flutter_samples/interaction_model_widget/absorb_pointer_widget.dart';
@@ -116,10 +120,35 @@ class MyHomePage extends StatelessWidget {
     ]),
     Tuple2('Camera', <Tuple2>[
       Tuple2(
-          'Camera',
-          (_) => CameraSample(
-                camera: cameras.first,
-              )),
+        'Camera',
+        (_) => CameraSample(
+          camera: cameras.first,
+        ),
+      ),
+      Tuple2(
+        'BarcodeScanning',
+        (_) => FirebaseBarcode(
+          camera: cameras.first,
+        ),
+      ),
+      Tuple2(
+        'ImageLabeling',
+        (_) => FirebaseImageLabel(
+          camera: cameras.first,
+        ),
+      ),
+      Tuple2(
+        'Face',
+        (_) => FirebaseFace(
+          camera: cameras.first,
+        ),
+      ),
+      Tuple2(
+        'Text',
+        (_) => FirebaseText(
+          camera: cameras.first,
+        ),
+      ),
     ])
   ];
   final String title;
